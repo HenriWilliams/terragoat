@@ -12,6 +12,22 @@ resource "aws_s3_bucket" "dockingbay" {
 }
 
 
+resource "aws_s3_bucket_versioning" "dockingbay" {
+  bucket = aws_s3_bucket.dockingbay.id
+
+  versioning_configuration {
+    status = "Enabled"
+  }
+}
+  bucket_prefix = "docking-bay-storage-"
+
+  tags = {
+    Name                 = "Docking Bay"
+    Environment          = "Dev"
+  }
+}
+
+
 resource "aws_s3_bucket_server_side_encryption_configuration" "dockingbay" {
   bucket = aws_s3_bucket.dockingbay.bucket
 
